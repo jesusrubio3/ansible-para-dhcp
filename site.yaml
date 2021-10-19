@@ -1,0 +1,4 @@
+- hosts: router
+  become: true
+  roles:
+    - role: dhcp-nat

@@ -1,0 +1,50 @@
+- name: "Actualizamos el sistema"
+  apt: update_cache=yes upgrade=yes
+
+- name: Instalación servidor dhcp
+  apt:
+    name: isc-dhcp-server
+
+- name: Instalación iptables
+  apt:
+    name: iptables
+
+- name: Configuración del fichero /etc/network/interfaces
+  ansible.builtin.template:
+    src: etc/network/interfaces
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: '0640'
+  notify:
+    - reinicio del sistema
+
+- name: Activación del bit de forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Configuración del fichero /etc/default/isc-dhcp-server
+  ansible.builtin.template:
+    src: etc/default/isc-dhcp-server
+    dest: /etc/default/isc-dhcp-server
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reinicio del dhcp
+
+- name: Configuración del servidor dhcp
+  ansible.builtin.template:
+    src: etc/dhcp/dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reinicio del dhcp
+ 
+
