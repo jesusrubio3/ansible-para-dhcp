@@ -1,0 +1,13 @@
+interfaz1: ens1
+interfaz2: ens2
+red1: 192.168.100.0
+red2: 192.168.200.0
+mascara_de_red: 255.255.255.0
+rango1: 192.168.100.5 192.168.100.200
+rango2: 192.168.200.5 192.168.200.200
+gateway1: 192.168.100.1
+gateway2: 192.168.200.1
+tiempo1: 43200
+tiempo2: 60
+dns: 1.1.1.1, 1.0.0.1
+interfaz_de_salida: enp1s0

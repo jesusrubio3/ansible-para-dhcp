@@ -3,20 +3,20 @@ source /etc/network/interfaces.d/*
 auto lo
 iface lo inet loopback
 
-allow-hotplug enp1s0
-iface enp1s0 inet dhcp
+allow-hotplug {{interfaz_de_salida}}
+iface {{interfaz_de_salida}} inet dhcp
 
-auto ens1
-iface ens1 inet static
-address 192.168.100.1
-netmask 255.255.255.0
+auto {{interfaz1}}
+iface {{interfaz1}} inet static
+address {{gateway1}}
+netmask {{mascara_de_red}}
 
-auto ens2
-iface ens2 inet static
-address 192.168.200.1
-netmask 255.255.255.0
+auto {{interfaz2}}
+iface {{interfaz2}} inet static
+address {{gateway2}}
+netmask {{mascara_de_red}}
 
 
 
-post-up iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o enp1s0 -j MASQUERADE
-post-up iptables -t nat -A POSTROUTING -s 192.168.200.0/24 -o enp1s0 -j MASQUERADE
+post-up iptables -t nat -A POSTROUTING -s {{red1}} -o {{interfaz_de_salida}} -j MASQUERADE
+post-up iptables -t nat -A POSTROUTING -s {{red2}} -o {{interfaz_de_salida}} -j MASQUERADE
