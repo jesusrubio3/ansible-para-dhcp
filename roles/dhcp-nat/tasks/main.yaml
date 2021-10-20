@@ -17,7 +17,7 @@
     group: root
     mode: '0640'
   notify:
-    - reinicio del sistema
+    - reinicio del networking
 
 - name: Activación del bit de forwarding
   sysctl:
